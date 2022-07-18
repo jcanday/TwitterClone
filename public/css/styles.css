@@ -1,0 +1,16 @@
+*, *::after, *::before{
+    margin:0;
+    padding:0;
+    box-sizing: inherit;
+}
+body{
+    box-sizing: border-box;
+}
+.nav-contain{
+    display:flex;
+    gap:2rem;
+    align-items: space-between;
+}
+.navbar-collapse{
+    flex-grow:0;
+}
