@@ -1,13 +1,28 @@
 const express = require('express')
+const path = require('path') 
+const dotenv = require('dotenv')
+const { connectDB } = require('./src/db')
+const { graphqlHTTP } = require('express-graphql')
+const schema = require('./src/graphql/schema')
+dotenv.config()
+
 const app = express()
-const port = 3001
-const path = require('path')
+connectDB()
+
+
+
 
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname,'public')))
-app.listen(port, () => {
-    console.log(`Port Number = ${port}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Port Number = ${process.env.PORT}`)
 }) 
+
+
+app.use("/graphql", graphqlHTTP({
+    schema,
+    graphiql: true
+}))
 
 app.get('/',(req,res)=>{
     res.render('pages/index')
